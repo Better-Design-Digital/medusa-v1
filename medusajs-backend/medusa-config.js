@@ -40,27 +40,7 @@ const cloudinaryConfigured = CLOUDINARY_CLOUD_NAME && CLOUDINARY_API_KEY && CLOU
 
 const ADMIN_APP_PORT = process.env.PORT || 7001;
 
-const fileServicePlugin = cloudinaryConfigured
-  ? {
-    resolve: `medusa-file-cloudinary`,
-    options: {
-      cloud_name: CLOUDINARY_CLOUD_NAME,
-      api_key: CLOUDINARY_API_KEY,
-      api_secret: CLOUDINARY_API_SECRET,
-      secure: true,
-    },
-  }
-  : {
-    resolve: `@medusajs/file-local`,
-    options: {
-      upload_dir: "uploads",
-    },
-  };
-
-const plugins = [
-  `medusa-fulfillment-manual`,
-  `medusa-payment-manual`,
-  {
+const fileServicePlugin = {
     resolve: `medusa-file-s3`,
     options: {
         s3_url: process.env.S3_URL,
@@ -76,7 +56,11 @@ const plugins = [
           process.env.S3_DOWNLOAD_FILE_DURATION,
         prefix: process.env.S3_PREFIX,
     },
-  },
+  };
+
+const plugins = [
+  `medusa-fulfillment-manual`,
+  `medusa-payment-manual`,
   fileServicePlugin,
   {
     resolve: "@medusajs/admin",
