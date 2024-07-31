@@ -20,11 +20,11 @@ const Hero = () => {
           </Heading>
         </span>
         <a
-          href="https://funkyton.com/tutorial-customize-your-medusajs-webshop-storefron/"
+          href="https://www.betterdesigndigital.com"
           target="_blank"
         >
           <h1 style={{ textDecoration: "underline" }}>
-            Visit the tutorial
+            Contact us!
           </h1>
         </a>
       </div>
