@@ -61,8 +61,6 @@ services:
   - key: APP_ENV
     sync: false
   region: frankfurt
-  domains:
-  - zeero.anythink.uk
   autoDeploy: false
 - type: web
   name: storefront
