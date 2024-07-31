@@ -1,0 +1,132 @@
+# Exported from Render on 2024-07-31T09:50:43Z
+services:
+- type: web
+  name: anythink
+  runtime: image
+  image:
+    url: ghcr.io/better-design-digital/anythink-v2-alpha:main
+    creds:
+      fromRegistryCreds:
+        name: Registry
+  plan: standard
+  envVars:
+  - key: INIT_ROOT_USERNAME
+    sync: false
+  - key: INIT_ROOT_NICKNAME
+    sync: false
+  - key: INIT_ROOT_PASSWORD
+    sync: false
+  - key: INIT_ROOT_EMAIL
+    sync: false
+  - key: INIT_LANG
+    sync: false
+  - key: CACHE_MEMORY_MAX
+    sync: false
+  - key: CACHE_DEFAULT_STORE
+    sync: false
+  - key: DB_DIALECT_OPTIONS_SSL_REJECT_UNAUTHORIZED
+    sync: false
+  - key: DB_UNDERSCORED
+    sync: false
+  - key: DB_LOGGING
+    sync: false
+  - key: DB_PASSWORD
+    sync: false
+  - key: DB_USER
+    sync: false
+  - key: DB_DATABASE
+    sync: false
+  - key: DB_PORT
+    sync: false
+  - key: DB_HOST
+    sync: false
+  - key: DB_DIALECT
+    sync: false
+  - key: LOGGER_FORMAT
+    sync: false
+  - key: LOGGER_MAX_SIZE
+    sync: false
+  - key: LOGGER_LEVEL
+    sync: false
+  - key: LOGGER_BASE_PATH
+    sync: false
+  - key: LOGGER_TRANSPORT
+    sync: false
+  - key: API_BASE_PATH
+    sync: false
+  - key: APP_KEY
+    sync: false
+  - key: APP_PORT
+    sync: false
+  - key: APP_ENV
+    sync: false
+  region: frankfurt
+  domains:
+  - zeero.anythink.uk
+  autoDeploy: false
+- type: web
+  name: storefront
+  runtime: node
+  repo: https://github.com/Better-Design-Digital/medusa-v1
+  plan: standard
+  envVars:
+  - key: REVALIDATE_SECRET
+    sync: false
+  - key: NEXT_PUBLIC_SEARCH_ENDPOINT
+    sync: false
+  - key: NEXT_PUBLIC_MEDUSA_BACKEND_URL
+    sync: false
+  - key: NEXT_PUBLIC_INDEX_NAME
+    sync: false
+  - key: NEXT_PUBLIC_DEFAULT_REGION
+    sync: false
+  - key: NEXT_PUBLIC_BASE_URL
+    sync: false
+  region: frankfurt
+  buildCommand: yarn
+  startCommand: yarn build && yarn start
+  rootDir: ./medusajs-storefront
+- type: web
+  name: commerce
+  runtime: node
+  repo: https://github.com/Better-Design-Digital/medusa-v1
+  plan: standard
+  envVars:
+  - key: BUCKET_NAME
+    sync: false
+  - key: STORAGE_SERVICE_KEY
+    sync: false
+  - key: STORAGE_BUCKET_REF
+    sync: false
+  - key: STORE_CORS
+    sync: false
+  - key: REDIS_URL
+    fromService:
+      name: commerce-redis
+      type: redis
+      property: hostport
+  - key: POSTGRES_URL
+    sync: false
+  - key: MEDUSA_ADMIN_ONBOARDING_TYPE
+    sync: false
+  - key: JWT_SECRET
+    sync: false
+  - key: DATABASE_URL
+    sync: false
+  - key: COOKIE_SECRET
+    sync: false
+  - key: AUTH_CORS
+    sync: false
+  - key: ADMIN_CORS
+    sync: false
+  region: frankfurt
+  buildCommand: npm install && npm run build
+  startCommand: npm run seed:once && npm run start
+  rootDir: ./medusajs-backend
+- type: redis
+  name: commerce-redis
+  plan: starter
+  region: frankfurt
+  maxmemoryPolicy: noeviction
+  ipAllowList: []
+version: "1"
