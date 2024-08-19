@@ -1,44 +1,31 @@
-<p align="center">
-  <a href="https://www.medusajs.com">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/59018053/229103275-b5e482bb-4601-46e6-8142-244f531cebdb.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-      <img alt="Medusa logo" src="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg" width=100>
-    </picture>
-  </a>
-  <a href="https://railway.app?referralCode=-Yg50p">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://railway.app/brand/logo-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://railway.app/brand/logo-light.svg">
-      <img alt="Railway logo" src="https://railway.app/brand/logo-light.svg" width=100>
-    </picture>
-  </a>
-</p>
+# Introduction
 
+This marketplace starter provides a foundational example to help you build and customize your own marketplace using Medusa.js. Begin your project with this starter template and tailor it to meet your specific needs.
 
+## Getting Started
 
-# medusajs-backend
+Visit the [Quickstart Guide](https://docs.medusajs.com/create-medusa-app) to set up a server.
 
-### railway setup
-Please change the value of environtment variables: `COOCKIE_SECRET` and `JWT_SECRET`.
+Visit the [Docs](https://docs.medusajs.com/development/backend/prepare-environment) to learn more about our system requirements.
 
-### local setup
-- Rename `.env.template` ->  `.env`
-- To connect to your online database, from local; copy the `DATABASE_URL` value that have been auto generated on railway, and add to your `.env`
+# User Management
 
-### requirements
-- **postgres database** (will be automatically generated if using railway template)
-- **redis** (will be automatically generated if using railway template)
+The user management is facilitated by three additional columns in the user table: `is_admin`, `store_id` and `status`. A marketplace admin is identified by the `is_admin` column set to TRUE, and `store_id` set to NULL, indicating an administrative role. Additionally, the `role` column in the user table can be utilized to implement Role-Based Access Control (RBAC) for marketplace and store users. Vendor after register has status set to `pending` and only after admin changes that status to `active` vendor can log in.
 
-### optional
- - **cloudinary**: I highly recommend using a proper media service.
-   1. Sign up a free account with [cloudinary](https://cloudinary.com/invites/lpov9zyyucivvxsnalc5/yhlpdo1vaw2mq1la0nks?t=default) choose "developer API calls" type of user.
-   2. Add your `cloud_name`, `api_key` & `api_secret` to .env.local this will eneable 3loudinary as a file service on local dev environment
-   3. Configure the same environment variables in your railway dashboard to enable cloudinary in production.
-   4. If the steps above was confusin, visit [https://medusajs.com/plugins/medusa-file-cloudinary/](https://medusajs.com/plugins/medusa-file-cloudinary/) for more setup details. 
+# Store Setup
 
-### commands
-`cd medusajs-backend/`
-`npm run build` will compile app.
-`npm run dev` will start local admin dashboard app to manage products and orders etc.
-`npm run start` will start the backend server, needed for the storefront
+Upon registering, a user's account is linked to a new Store entity. The store owner can then invite additional users to their store using Medusa's invite system, enabling team collaboration.
+
+# Shipping Options
+
+Stores have the ability to create and manage their own shipping options, which are then associated with their products. These shipping options are visible in the product responses to ensure clear communication of shipping terms.
+
+# Product Management
+
+When a product is created, the `store_id` of the currently logged-in user's store is associated with the product. This ensures that all products are correctly linked to their respective stores.
+
+# Order Processing
+
+Upon placing an order, the system automatically generates child orders for each vendor involved. This is achieved by iterating through each line item, checking the `store_id`, and grouping items from the same store into a single order. These child orders are then visible in the respective vendor's dashboard for processing.
+
+Feel free to extend and modify this starter as needed to suit your marketplace requirements.
