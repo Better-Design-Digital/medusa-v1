@@ -31,16 +31,20 @@ const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost/medusa-st
 
 const REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
 
+const ADMIN_APP_PORT = process.env.PORT || 7001;
+
 const isSeeding = process.env.npm_lifecycle_event === 'seed';
 
 const plugins = [
     `medusa-fulfillment-manual`,
     `medusa-payment-manual`,
     {
-        resolve: `@medusajs/file-local`,
-        options: {
-            upload_dir: 'uploads',
-        },
+      resolve: `medusa-storage-supabase`,
+      options: {
+        referenceID: process.env.STORAGE_BUCKET_REF,
+        serviceKey: process.env.STORAGE_SERVICE_KEY,
+        bucketName: process.env.BUCKET_NAME,
+      },
     },
     // Only include these plugins if not seeding
     ...(!isSeeding
@@ -50,8 +54,15 @@ const plugins = [
                 options: {},
             },
             {
-                resolve: '@medusajs/admin',
-                options: {},
+              resolve: "@medusajs/admin",
+              /** @type {import('@medusajs/admin').PluginOptions} */
+              options: {
+                autoRebuild: true,
+                develop: {
+                  open: process.env.OPEN_BROWSER !== "false",
+                  port: ADMIN_APP_PORT,
+                },
+              },
             },
         ]
         : []),
@@ -80,7 +91,7 @@ const projectConfig = {
 	database_url: DATABASE_URL,
 	admin_cors: ADMIN_CORS,
 	// Uncomment the following lines to enable REDIS
-	// redis_url: REDIS_URL
+	redis_url: REDIS_URL
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
