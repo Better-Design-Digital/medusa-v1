@@ -15,7 +15,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   // Redirect to dashboard if user is logged in
-
   useEffect(() => {
     if (user) {
       navigate("/");
@@ -30,7 +29,6 @@ const LoginPage = () => {
 
   const showLogin = () => {
     setResetPassword(false);
-
     navigate("/login", { replace: true });
   };
 
@@ -38,14 +36,20 @@ const LoginPage = () => {
     setResetPassword(true);
   };
 
+  const goToRegister = () => {
+    navigate("/register");
+  };
+
   return (
     <PublicLayout>
       <SEO title="Login" />
-
       {resetPassword ? (
         <ResetTokenCard goBack={showLogin} />
       ) : (
-        <LoginCard toResetPassword={showResetPassword} />
+        <LoginCard
+          toResetPassword={showResetPassword}
+          toRegister={goToRegister} // Pass the goToRegister function as a prop
+        />
       )}
     </PublicLayout>
   );

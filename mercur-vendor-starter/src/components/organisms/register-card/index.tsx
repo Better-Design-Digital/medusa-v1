@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-
+import { useNavigate } from "react-router-dom";
 import Button from "../../fundamentals/button";
 import SigninInput from "../../molecules/input-signin";
 import useNotification from "../../../hooks/use-notification";
@@ -17,6 +17,7 @@ const RegisterCard = () => {
   const [isDuplicatedEmail, setIsDuplicatedEmail] = useState(false);
 
   const notification = useNotification();
+  const navigate = useNavigate(); 
 
   const {
     register,
@@ -47,10 +48,12 @@ const RegisterCard = () => {
           setValue("password", "");
 
           notification(
-            "Sukces",
+            "Success",
             "Your account has been created. Once it has been approved by the administrator, you will be notified by email.",
             "success"
           );
+
+          navigate("/login"); 
         },
         onError: (e) => {
           if (e) {

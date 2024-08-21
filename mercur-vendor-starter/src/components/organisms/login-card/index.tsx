@@ -14,9 +14,10 @@ type FormValues = {
 
 type LoginCardProps = {
   toResetPassword: () => void;
+  toRegister: () => void; // Added the toRegister prop
 };
 
-const LoginCard = ({ toResetPassword }: LoginCardProps) => {
+const LoginCard = ({ toResetPassword, toRegister }: LoginCardProps) => {
   const {
     register,
     handleSubmit,
@@ -49,6 +50,7 @@ const LoginCard = ({ toResetPassword }: LoginCardProps) => {
       },
     });
   };
+
   return (
     <div className="gap-y-large flex flex-col">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -86,6 +88,12 @@ const LoginCard = ({ toResetPassword }: LoginCardProps) => {
             onClick={toResetPassword}
           >
             {t("login-card-forgot-your-password", "Forgot your password?")}
+          </span>
+          <span
+            className="inter-small-regular text-grey-50 mt-4 cursor-pointer"
+            onClick={toRegister} 
+          >
+            {t("login-card-dont-have-account", "Don't have an account? Register")}
           </span>
         </div>
       </form>
