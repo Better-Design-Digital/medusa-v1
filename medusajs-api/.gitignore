@@ -19,12 +19,17 @@ build
 build-vendor
 .cache
 
+# Yarn
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+.pnp.*
+.yarnrc.yml
+.yarn/cache
 
 .vscode/
 

@@ -8,7 +8,7 @@ export const restrictedAdminMiddlewares = [
 	{
 		matcher: '/admin/apps*',
 	},
-	// { matcher: '/admin/batch-jobs*' },
+	{ matcher: '/admin/batch-jobs*' },
 	{
 		matcher: '/admin/currencies/*',
 		method: ['POST'],
@@ -41,13 +41,13 @@ export const restrictedAdminMiddlewares = [
 	{
 		matcher: '/admin/price-lists*',
 	},
-	// {
-	// 	matcher: '/admin/product-categories*',
-	// 	method: ['POST', 'DELETE'],
-	// },
-	// {
-	// 	matcher: '/admin/collections*',
-	// },
+	{
+		matcher: '/admin/product-categories*',
+		method: ['POST', 'DELETE'],
+	},
+	{
+		matcher: '/admin/collections*',
+	},
 	{
 		matcher: '/admin/publishable-api-keys*',
 	},

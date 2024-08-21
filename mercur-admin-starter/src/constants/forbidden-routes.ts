@@ -1,8 +1,8 @@
 export const forbiddenRoutes = [
   '/products',
   '/products/:id',
-  // '/product-categories',
-  // '/product-categories',
+  '/product-categories',
+  '/product-categories',
   '/orders',
   '/orders/:id',
   '/customers',
