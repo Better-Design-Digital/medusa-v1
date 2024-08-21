@@ -108,5 +108,6 @@
 		"coverageDirectory": "./coverage",
 		"testEnvironment": "node"
 	},
-	"main": "index.js"
+	"main": "index.js",
+	"packageManager": "yarn@4.4.0"
 }
