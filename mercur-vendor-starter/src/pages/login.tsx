@@ -48,7 +48,7 @@ const LoginPage = () => {
       ) : (
         <LoginCard
           toResetPassword={showResetPassword}
-          toRegister={goToRegister} // Pass the goToRegister function as a prop
+          toRegister={goToRegister} 
         />
       )}
     </PublicLayout>
