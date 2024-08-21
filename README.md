@@ -4,10 +4,10 @@
 
 This guide will walk you through setting up and running the four applications in the MedusaJS project locally. Follow the steps below to get started. The project consists of the following components:
 
-- **Medusa API**: The backend API handling all business logic.
-- **Admin UI**: The user interface for administrators to manage the store.
-- **Vendor UI**: The user interface for vendors to manage their products.
-- **Storefront**: The customer-facing e-commerce website.
+- **Medusa/Mercur API**: The backend API handling all business logic.
+- **Mercur Admin UI**: The user interface for administrators to manage the stores, products, overlook everything.
+- **Mercur Vendor UI**: The user interface for vendors to manage their products.
+- **Medusa Storefront**: The customer-facing e-commerce website.
 
 Each component can be run locally, tested, and deployed independently. Let's get started! 💻
 
@@ -218,10 +218,10 @@ yarn dev
 
 ## 6. How These Components Work Together 🧩
 
-- **Medusa API**: Acts as the core of the system, handling all data and business logic.
-- **Admin UI**: Piggy backs of off the Medusa API/Admin. Provides administrators with a dashboard to manage products, orders, and other store-related tasks.
-- **Vendor UI**: Piggy backs of off the Medusa API/Admin. Offers vendors a separate interface to manage their own products.
-- **Storefront**: The frontend that customers interact with, displaying products and handling the checkout process.
+- **Mercur/Medusa API**: Acts as the core of the system, handling all data and business logic.
+- **Mercur Admin UI**: Piggy backs of off the Medusa API/Admin. Provides administrators with a dashboard to manage products, orders, and other store-related tasks.
+- **Mercur Vendor UI**: Piggy backs of off the Medusa API/Admin. Offers vendors a separate interface to manage their own products.
+- **Medusa Storefront**: The frontend that customers interact with, displaying products and handling the checkout process.
 
 Each component interacts with the Medusa API, which serves as the backend for both the UIs and the Storefront. The system is designed to be modular, allowing each part to be deployed and scaled independently.
 
