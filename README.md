@@ -107,7 +107,7 @@ However, **we recommend using the separate, more comprehensive [Vendor UI](#4-se
 **In a new terminal**, navigate to the Admin UI directory:
 
 ```bash
-cd ../mercur-admin-starter
+cd mercur-admin-starter
 ```
 
 ### 3.1. Configure Environment Variables 🌍
@@ -145,7 +145,7 @@ yarn dev
 **In a new terminal**, navigate to the Vendor UI directory:
 
 ```bash
-cd ../mercur-vendor-starter
+cd mercur-vendor-starter
 ```
 
 ### 4.1. Configure Environment Variables 🌍
@@ -184,7 +184,7 @@ yarn dev
 **In a new terminal**, navigate to the Storefront directory:
 
 ```bash
-cd ../medusajs-storefront
+cd medusajs-storefront
 ```
 
 ### 5.1. Configure Environment Variables 🌍
