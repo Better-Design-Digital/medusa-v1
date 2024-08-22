@@ -7,6 +7,10 @@ import GearIcon from "../../fundamentals/icons/gear-icon";
 import TagIcon from "../../fundamentals/icons/tag-icon";
 import SidebarMenuItem from "../../molecules/sidebar-menu-item";
 import UserMenu from "../../molecules/user-menu";
+import UsersIcon from "../../fundamentals/icons/users-icon";
+import SaleIcon from "../../fundamentals/icons/sale-icon";
+import GiftIcon from "../../fundamentals/icons/gift-icon";
+import SwatchIcon from "../../fundamentals/icons/swatch-icon";
 
 const ICON_SIZE = 20;
 
@@ -55,6 +59,30 @@ const Sidebar: React.FC = () => {
             icon={<TagIcon size={ICON_SIZE} />}
             text={t("sidebar-products", "Products")}
             triggerHandler={triggerHandler}
+          />
+          <SidebarMenuItem
+            pageLink={"/a/product-categories"}
+            icon={<SwatchIcon size={ICON_SIZE} />}
+            text={t("sidebar-categories", "Categories")}
+            triggerHandler={triggerHandler}
+          />
+          <SidebarMenuItem
+            pageLink={"/a/customers"}
+            icon={<UsersIcon size={ICON_SIZE} />}
+            triggerHandler={triggerHandler}
+            text={t("sidebar-customers", "Customers")}
+          />
+          <SidebarMenuItem
+            pageLink={"/a/discounts"}
+            icon={<SaleIcon size={ICON_SIZE} />}
+            triggerHandler={triggerHandler}
+            text={t("sidebar-discounts", "Discounts")}
+          />
+          <SidebarMenuItem
+            pageLink={"/a/gift-cards"}
+            icon={<GiftIcon size={ICON_SIZE} />}
+            triggerHandler={triggerHandler}
+            text={t("sidebar-gift-cards", "Gift Cards")}
           />
           <SidebarMenuItem
             pageLink={"/a/settings"}
