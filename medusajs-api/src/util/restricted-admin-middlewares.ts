@@ -8,24 +8,24 @@ export const restrictedAdminMiddlewares = [
 	{
 		matcher: '/admin/apps*',
 	},
-	{ matcher: '/admin/batch-jobs*' },
-	{
-		matcher: '/admin/currencies/*',
-		method: ['POST'],
-	},
-	{
-		matcher: '/admin/customer-groups*',
-	},
-	{
-		matcher: '/admin/customers*',
-	},
-	{
-		matcher: '/admin/discounts*',
-	},
+	// { matcher: '/admin/batch-jobs*' },
+	// {
+	// 	matcher: '/admin/currencies/*',
+	// 	method: ['POST'],
+	// },
+	// {
+	// 	matcher: '/admin/customer-groups*',
+	// },
+	// {
+	// 	matcher: '/admin/customers*',
+	// },
+	// {
+	// 	matcher: '/admin/discounts*',
+	// },
 	{ matcher: '/admin/draft-orders*' },
-	{
-		matcher: '/admin/gift-cards*',
-	},
+	// {
+	// 	matcher: '/admin/gift-cards*',
+	// },
 	{
 		matcher: '/admin/inventory-items*',
 	},
@@ -41,13 +41,13 @@ export const restrictedAdminMiddlewares = [
 	{
 		matcher: '/admin/price-lists*',
 	},
-	{
-		matcher: '/admin/product-categories*',
-		method: ['POST', 'DELETE'],
-	},
-	{
-		matcher: '/admin/collections*',
-	},
+	// {
+	// 	matcher: '/admin/product-categories*',
+	// 	method: ['POST', 'DELETE'],
+	// },
+	// {
+	// 	matcher: '/admin/collections*',
+	// },
 	{
 		matcher: '/admin/publishable-api-keys*',
 	},
