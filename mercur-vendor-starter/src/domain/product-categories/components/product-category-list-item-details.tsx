@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProductCategory } from '@medusajs/medusa'
 import clsx from 'clsx'
-import { useAdminDeleteProductCategory } from 'medusa-react'
+// Vendors not allowed to edit or delete categories - Commenting out these imports
+// import { useAdminDeleteProductCategory } from 'medusa-react'
 
 import Tooltip from '../../../components/atoms/tooltip'
 import Button from '../../../components/fundamentals/button'
@@ -13,8 +14,9 @@ import MoreHorizontalIcon from '../../../components/fundamentals/icons/more-hori
 import PlusIcon from '../../../components/fundamentals/icons/plus-icon'
 import TagDotIcon from '../../../components/fundamentals/icons/tag-dot-icon'
 import TagIcon from '../../../components/fundamentals/icons/tag-icon'
-import TrashIcon from '../../../components/fundamentals/icons/trash-icon'
-import Actionables from '../../../components/molecules/actionables'
+// Vendors not allowed to edit or delete categories - Commenting out these imports
+// import TrashIcon from '../../../components/fundamentals/icons/trash-icon'
+// import Actionables from '../../../components/molecules/actionables'
 import TooltipIcon from '../../../components/molecules/tooltip-icon'
 import useNotification from '../../../hooks/use-notification'
 import { ProductCategoriesContext } from '../pages'
@@ -37,39 +39,40 @@ function ProductCategoryListItemDetails(
 
   const productCategoriesPageContext = useContext(ProductCategoriesContext)
 
-  const { mutateAsync: deleteCategory } = useAdminDeleteProductCategory(item.id)
+  // Vendors not allowed to edit or delete categories - Commenting out the delete category mutation
+  // const { mutateAsync: deleteCategory } = useAdminDeleteProductCategory(item.id)
 
   const actions = [
-    {
-      label: t('components-edit', 'Edit'),
-      onClick: () => productCategoriesPageContext.editCategory(item),
-      icon: <EditIcon size={20} />,
-    },
-    {
-      label: t('components-delete', 'Delete'),
-      variant: 'danger',
-      onClick: async () => {
-        try {
-          await deleteCategory()
-          notification(
-            t('components-success', 'Success'),
-            t('components-category-deleted', 'Category deleted'),
-            'success'
-          )
-        } catch (e) {
-          notification(
-            t('components-error', 'Error'),
-            t(
-              'components-category-deletion-failed',
-              'Category deletion failed'
-            ),
-            'error'
-          )
-        }
-      },
-      icon: <TrashIcon size={20} />,
-      disabled: !!item.category_children.length,
-    },
+    // {
+    //   label: t('components-edit', 'Edit'),
+    //   onClick: () => productCategoriesPageContext.editCategory(item),
+    //   icon: <EditIcon size={20} />,
+    // },
+    // {
+    //   label: t('components-delete', 'Delete'),
+    //   variant: 'danger',
+    //   onClick: async () => {
+    //     try {
+    //       await deleteCategory()
+    //       notification(
+    //         t('components-success', 'Success'),
+    //         t('components-category-deleted', 'Category deleted'),
+    //         'success'
+    //       )
+    //     } catch (e) {
+    //       notification(
+    //         t('components-error', 'Error'),
+    //         t(
+    //           'components-category-deletion-failed',
+    //           'Category deletion failed'
+    //         ),
+    //         'error'
+    //       )
+    //     }
+    //   },
+    //   icon: <TrashIcon size={20} />,
+    //   disabled: !!item.category_children.length,
+    // },
   ]
 
   return (
@@ -79,7 +82,8 @@ function ProductCategoryListItemDetails(
         className="flex h-[40px] items-center"
       >
         <div className="flex w-[32px] items-center justify-center">
-          {props.handler}
+          {/* Vendors not allowed to reorder categories - Disabling drag handler */}
+          {/* {props.handler} */}
         </div>
 
         <div className="flex w-full items-center justify-between">
@@ -136,7 +140,8 @@ function ProductCategoryListItemDetails(
           </div>
 
           <div className="flex items-center gap-2">
-            <Tooltip
+            {/* Vendors not allowed to add subcategories - Commenting out add button */}
+            {/* <Tooltip
               style={{ zIndex: 1 }}
               content={
                 <>
@@ -156,8 +161,9 @@ function ProductCategoryListItemDetails(
               >
                 <PlusIcon color="#687076" size={18} />
               </Button>
-            </Tooltip>
-            <Actionables
+            </Tooltip> */}
+            {/* Vendors not allowed to edit or delete categories - Commenting out Actionables */}
+            {/* <Actionables
               forceDropdown
               actions={actions}
               customTrigger={
@@ -169,7 +175,7 @@ function ProductCategoryListItemDetails(
                   <MoreHorizontalIcon color="#687076" size={20} />
                 </Button>
               }
-            />
+            /> */}
           </div>
         </div>
       </div>

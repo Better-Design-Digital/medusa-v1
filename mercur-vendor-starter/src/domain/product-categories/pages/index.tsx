@@ -7,8 +7,9 @@ import Spacer from '../../../components/atoms/spacer'
 import BodyCard from '../../../components/organisms/body-card'
 import useToggleState from '../../../hooks/use-toggle-state'
 import ProductCategoriesList from '../components/product-categories-list'
-import CreateProductCategory from '../modals/add-product-category'
-import EditProductCategoriesSideModal from '../modals/edit-product-category'
+// Vendors not allowed to add or edit categories - Commenting out these imports
+// import CreateProductCategory from '../modals/add-product-category'
+// import EditProductCategoriesSideModal from '../modals/edit-product-category'
 import { flattenCategoryTree } from '../utils'
 
 /**
@@ -58,11 +59,12 @@ function ProductCategoryPage() {
       include_descendants_tree: true,
     })
 
+  // Vendors not allowed to add categories - Commenting out the add category action
   const actions = [
-    {
-      label: t('pages-add-category', 'Add category'),
-      onClick: showCreateModal,
-    },
+    // {
+    //   label: t('pages-add-category', 'Add category'),
+    //   onClick: showCreateModal,
+    // },
   ]
 
   const showPlaceholder = !isLoading && !categories.length
@@ -108,13 +110,14 @@ function ProductCategoryPage() {
             )}
           </BodyCard>
           <Spacer />
-          {isCreateModalVisible && (
+          {/* Vendors not allowed to create or edit categories - Commenting out the modals */}
+          {/* {isCreateModalVisible && (
             <CreateProductCategory
               parentCategory={activeCategory}
               categories={flattenedCategories}
               closeModal={() => {
-                hideCreateModal()
-                setActiveCategory(undefined)
+                hideCreateModal();
+                setActiveCategory(undefined);
               }}
             />
           )}
@@ -124,7 +127,7 @@ function ProductCategoryPage() {
             activeCategory={activeCategory}
             isVisible={!!activeCategory && isEditModalVisible}
             categories={flattenedCategories}
-          />
+          /> */}
         </div>
       </div>
     </ProductCategoriesContext.Provider>

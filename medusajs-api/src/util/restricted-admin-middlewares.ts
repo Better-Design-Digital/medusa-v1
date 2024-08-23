@@ -41,16 +41,16 @@ export const restrictedAdminMiddlewares = [
 	{
 		matcher: '/admin/price-lists*',
 	},
-	// {
-	// 	matcher: '/admin/product-categories*',
-	// 	method: ['POST', 'DELETE'],
-	// },
+	{
+		matcher: '/admin/product-categories*',
+		method: ['POST', 'DELETE'],
+	},
 	// {
 	// 	matcher: '/admin/collections*',
 	// },
-	// {
-	// 	matcher: '/admin/publishable-api-keys*',
-	// },
+	{
+		matcher: '/admin/publishable-api-keys*',
+	},
 	{
 		matcher: '/admin/regions*',
 		method: ['POST', 'DELETE'],
