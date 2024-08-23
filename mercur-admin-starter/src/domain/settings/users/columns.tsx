@@ -4,7 +4,12 @@ import { Checkbox, StatusBadge } from "@medusajs/ui";
 import { createColumnHelper } from "@tanstack/react-table";
 import moment from "moment";
 
-const columnHelper = createColumnHelper<User>();
+// Extending the User type to include is_admin
+interface UserWithAdmin extends User {
+  is_admin: boolean;
+}
+
+const columnHelper = createColumnHelper<UserWithAdmin>();
 
 export const useUserTableColumns = () => {
   const columns = useMemo(
@@ -21,10 +26,9 @@ export const useUserTableColumns = () => {
             onCheckedChange={(value) =>
               table.toggleAllPageRowsSelected(!!value)
             }
-            aria-label={"Select all products on the current page"}
+            aria-label={"Select all users on the current page"}
           />
         ),
-
         cell: ({ table, row }) => {
           const { selectedIds } = table.options.meta as {
             selectedIds: string[];
@@ -50,12 +54,12 @@ export const useUserTableColumns = () => {
         header: "E-mail",
         cell: (info) => info.getValue(),
       }),
-      columnHelper.accessor("role", {
+      columnHelper.accessor("is_admin", {
         id: "role",
         header: "Role",
         cell: (info) => (
           <span className="overflow-hidden text-ellipsis whitespace-nowrap">
-            {info.getValue()}
+            {info.getValue() ? "Admin" : "Vendor"}
           </span>
         ),
       }),

@@ -31,5 +31,7 @@ export const useAdminUsers = (params?: AdminUsersParams) => {
     },
   );
 
-  return { ...data, ...other } as const;
+  const vendorUsers = data?.users.filter(user => user.role === 'vendor');
+
+  return { ...data, vendorUsers, ...other } as const;
 };
