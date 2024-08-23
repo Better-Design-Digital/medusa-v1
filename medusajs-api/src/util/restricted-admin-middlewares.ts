@@ -48,9 +48,9 @@ export const restrictedAdminMiddlewares = [
 	// {
 	// 	matcher: '/admin/collections*',
 	// },
-	{
-		matcher: '/admin/publishable-api-keys*',
-	},
+	// {
+	// 	matcher: '/admin/publishable-api-keys*',
+	// },
 	{
 		matcher: '/admin/regions*',
 		method: ['POST', 'DELETE'],
