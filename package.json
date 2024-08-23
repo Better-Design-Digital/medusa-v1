@@ -1,0 +1,12 @@
+{
+    "private": true,
+    "name": "medusa-monorepo",
+    "version": "1.0.0",
+    "workspaces": [
+      "packages/medusajs-api",
+      "packages/medusajs-storefront",
+      "packages/mercur-admin-starter",
+      "packages/mercur-vendor-starter"
+    ]
+  }
+  

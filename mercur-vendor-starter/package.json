@@ -1,5 +1,5 @@
 {
-  "name": "medusa-admin",
+  "name": "medusa-vendor",
   "version": "0.0.0",
   "resolutions": {
     "postcss": "^8.4.31"
