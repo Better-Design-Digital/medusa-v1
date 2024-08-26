@@ -136,7 +136,7 @@ const UserTable = () => {
         <div className="flex items-center gap-x-2">
           <ExclamationCircle className="text-ui-fg-base" />
           <Text className="text-ui-fg-subtle">
-            Error occured while loading user. Reload the page and try again. If
+            Error occurred while loading user. Reload the page and try again. If
             the issue persists, try again later.
           </Text>
         </div>
