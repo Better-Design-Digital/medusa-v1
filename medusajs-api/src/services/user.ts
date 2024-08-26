@@ -7,101 +7,125 @@ import { MedusaError } from '@medusajs/utils';
 import { Selector } from '@medusajs/types';
 
 type CreateUserInput = {
-	store_id?: string;
-	status?: UserStatus;
-	is_admin?: boolean;
+    store_id?: string;
+    status?: UserStatus;
+    is_admin?: boolean;
 } & MedusaCreateUserInput;
 
 class UserService extends MedusaUserService {
-	static LIFE_TIME = Lifetime.TRANSIENT;
+    static LIFE_TIME = Lifetime.TRANSIENT;
 
-	protected readonly loggedInUser_: User | null;
-	protected readonly storeService: StoreService;
+    protected readonly loggedInUser_: User | null;
+    protected readonly storeService: StoreService;
 
-	constructor(container) {
-		super(container);
-		this.storeService = container.storeService;
+    constructor(container) {
+        super(container);
+        this.storeService = container.storeService;
 
-		try {
-			this.loggedInUser_ = container.loggedInUser;
-		} catch (e) {
-			// avoid errors when backend first runs
-		}
-	}
+        try {
+            this.loggedInUser_ = container.loggedInUser;
+        } catch (e) {
+            // avoid errors when backend first runs
+        }
+    }
 
-	/**
-	 * Assigns store_id to selector if not provided
-	 * @param selector
-	 */
-	private prepareListConfig_(selector?: Selector<User>) {
-		selector = selector || {};
+    async create(user: CreateUserInput, password: string): Promise<User> {
+        return await super.create(user, password);
+    }
 
-		if (this.loggedInUser_?.store_id && !selector.store_id) {
-			selector.store_id = this.loggedInUser_.store_id;
-		}
-	}
+    async retrieve(userId: string, config?: FindConfig<User>): Promise<User> {
+        const user = await super.retrieve(userId, {
+            ...config,
+            relations: ['store'],  
+        });
 
-	/**
-	 * Create a new user and assigns it to a store if not provided
-	 * @param user
-	 * @param password
-	 * @returns {Promise<User>}
-	 */
-	async create(user: CreateUserInput, password: string): Promise<User> {
-		return await super.create(user, password);
-	}
+        if (user.store_id && this.loggedInUser_?.store_id && user.store_id !== this.loggedInUser_.store_id) {
+            throw new MedusaError(MedusaError.Types.NOT_FOUND, 'User does not exist');
+        }
 
-	async retrieve(userId: string, config?: FindConfig<User>): Promise<User> {
-		const user = await super.retrieve(userId, config);
+        if (user.store) {
+            (user as any).store_name = user.store.name;  
+        }
 
-		// If logged in user is not admin, we check if the user is from the same store
-		if (user.store_id && this.loggedInUser_?.store_id && user.store_id !== this.loggedInUser_.store_id) {
-			throw new MedusaError(MedusaError.Types.NOT_FOUND, 'User does not exist');
-		}
+        return user;
+    }
 
-		return user;
-	}
+    async list(selector?: Selector<User> & { q?: string }, config?: FindConfig<FilterableUserProps>): Promise<User[]> {
+        this.prepareListConfig_(selector);
 
-	/**
-	 * This method is used to authenticate user
-	 * If the user is not approved, we throw an error
-	 * @param email
-	 * @param config
-	 * @returns
-	 */
-	async retrieveByEmail(email: string, config: FindConfig<User> = {}): Promise<User> {
-		const userRepo = this.activeManager_.withRepository(this.userRepository_);
+        const users = await super.list(selector, {
+            ...config,
+            relations: ['store'], 
+        });
 
-		const query = buildQuery(
-			{
-				email: email.toLowerCase(),
-				status: UserStatus.ACTIVE,
-			},
-			config
-		);
-		const user = await userRepo.findOne(query);
+        // Include the store name in each user object
+        users.forEach(user => {
+            if (user.store) {
+                (user as any).store_name = user.store.name;
+            }
+        });
 
-		if (!user) {
-			throw new MedusaError(MedusaError.Types.NOT_FOUND, `User with email: ${email} was not found`);
-		}
+        return users;
+    }
 
-		return user;
-	}
+    async listAndCount(
+        selector?: Selector<User> & { q?: string },
+        config?: FindConfig<FilterableUserProps>
+    ): Promise<[User[], number]> {
+        this.prepareListConfig_(selector);
 
-	async list(selector?: Selector<User> & { q?: string }, config?: FindConfig<FilterableUserProps>): Promise<User[]> {
-		this.prepareListConfig_(selector);
+        const [users, count] = await super.listAndCount(selector, {
+            ...config,
+            relations: ['store'], 
+        });
 
-		return await super.list(selector, config);
-	}
+        // Include the store name in each user object
+        users.forEach(user => {
+            if (user.store) {
+                (user as any).store_name = user.store.name;
+            }
+        });
 
-	async listAndCount(
-		selector?: Selector<User> & { q?: string },
-		config?: FindConfig<FilterableUserProps>
-	): Promise<[User[], number]> {
-		this.prepareListConfig_(selector);
+        return [users, count];
+    }
 
-		return await super.listAndCount(selector, config);
-	}
+    /**
+     * This method is used to authenticate user
+     * If the user is not approved, we throw an error
+     * @param email
+     * @param config
+     * @returns
+     */
+    async retrieveByEmail(email: string, config: FindConfig<User> = {}): Promise<User> {
+        const userRepo = this.activeManager_.withRepository(this.userRepository_);
+
+        const query = buildQuery(
+            {
+                email: email.toLowerCase(),
+                status: UserStatus.ACTIVE,
+            },
+            config
+        );
+        const user = await userRepo.findOne(query);
+
+        if (!user) {
+            throw new MedusaError(MedusaError.Types.NOT_FOUND, `User with email: ${email} was not found`);
+        }
+
+        if (user.store) {
+            (user as any).store_name = user.store.name;
+        }
+		
+        return user;
+    }
+
+    private prepareListConfig_(selector?: Selector<User>) {
+        selector = selector || {};
+
+        if (this.loggedInUser_?.store_id && !selector.store_id) {
+            selector.store_id = this.loggedInUser_.store_id;
+        }
+    }
 }
 
 export default UserService;
