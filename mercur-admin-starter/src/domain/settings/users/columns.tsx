@@ -4,9 +4,10 @@ import { Checkbox, StatusBadge } from "@medusajs/ui";
 import { createColumnHelper } from "@tanstack/react-table";
 import moment from "moment";
 
-// Extending the User type to include is_admin
+// Extending the User type to include is_admin and store_name
 interface UserWithAdmin extends User {
   is_admin: boolean;
+  store_name?: string;  // Adding the store_name field
 }
 
 const columnHelper = createColumnHelper<UserWithAdmin>();
@@ -53,6 +54,15 @@ export const useUserTableColumns = () => {
         id: "email",
         header: "E-mail",
         cell: (info) => info.getValue(),
+      }),
+      columnHelper.accessor("store_name", {   
+        id: "store_name",
+        header: "Store Name",
+        cell: (info) => (
+          <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+            {info.getValue() ?? ""}  {/* Handle missing store names */}
+          </span>
+        ),
       }),
       columnHelper.accessor("is_admin", {
         id: "role",

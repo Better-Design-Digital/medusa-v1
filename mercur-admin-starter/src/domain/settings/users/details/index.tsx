@@ -74,9 +74,9 @@ const UserEdit = () => {
       ? `${user.first_name ?? "-"} ${user.last_name ?? "-"}`
       : null;
 
-  // Vendors have role 'admin'
   const isVendor = user.role === UserRoles.ADMIN;
   const billing_info = user?.metadata?.billing_info as string;
+  const storeName = user.store_name ?? "-"; // Ensure store_name is not null or undefined
 
   return (
     <div className="flex flex-col gap-3">
@@ -123,6 +123,14 @@ const UserEdit = () => {
             </Text>
             <Text size="large">{user.role}</Text>
           </div>
+          {storeName && (
+            <div className="border-ui-border-base flex flex-col gap-y-1 border-l px-4">
+              <Text size="base" className="text-ui-fg-subtle">
+                Store Name
+              </Text>
+              <Text size="large">{storeName}</Text>
+            </div>
+          )}
           {billing_info && isVendor && (
             <div className="border-ui-border-base flex flex-col gap-y-1 border-l px-4">
               <Text size="base" className="text-ui-fg-subtle">
