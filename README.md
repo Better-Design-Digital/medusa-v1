@@ -223,6 +223,10 @@ yarn dev
 - **Mercur Vendor UI**: Piggy backs of off the Medusa API/Admin. Offers vendors a separate interface to manage their own products.
 - **Medusa Storefront**: The frontend that customers interact with, displaying products and handling the checkout process.
 
+## 7. Vendor Store API Guide 📡
+
+Vendors can manage their stores and products through the backend Store API provided by Medusa. This includes creating, updating, and deleting products, as well as retrieving store details. To use these APIs, vendors must authenticate using their email and password to obtain an access token. For detailed instructions and examples on how to interact with the Store API, please refer to the [Vendor Store API Documentation](./medusajs-api/README.md) in the repository.
+
 Each component interacts with the Medusa API, which serves as the backend for both the UIs and the Storefront. The system is designed to be modular, allowing each part to be deployed and scaled independently.
 
 🎉 **Congratulations!** You now have a fully functional local setup of the MedusaJS Marketplace project!
