@@ -16,5 +16,9 @@ export const config: MiddlewaresConfig = {
 			middlewares: [cors(adminCors)],
 		},
 		...restrictedAdminMiddlewares,
+		{
+			matcher: '/stores/*',
+			middlewares: [authenticate(), registerLoggedInUser],
+		  },
 	],
 };

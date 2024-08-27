@@ -25,12 +25,13 @@ class UserService extends MedusaUserService {
         try {
             this.loggedInUser_ = container.loggedInUser;
         } catch (e) {
-            // avoid errors when backend first runs
+            // Avoid errors when backend first runs
         }
     }
 
     async create(user: CreateUserInput, password: string): Promise<User> {
-        return await super.create(user, password);
+        const createdUser = await super.create(user, password);
+        return createdUser;
     }
 
     async retrieve(userId: string, config?: FindConfig<User>): Promise<User> {
@@ -79,7 +80,6 @@ class UserService extends MedusaUserService {
             relations: ['store'], 
         });
 
-        // Include the store name in each user object
         users.forEach(user => {
             if (user.store) {
                 (user as any).store_name = user.store.name;
@@ -89,13 +89,6 @@ class UserService extends MedusaUserService {
         return [users, count];
     }
 
-    /**
-     * This method is used to authenticate user
-     * If the user is not approved, we throw an error
-     * @param email
-     * @param config
-     * @returns
-     */
     async retrieveByEmail(email: string, config: FindConfig<User> = {}): Promise<User> {
         const userRepo = this.activeManager_.withRepository(this.userRepository_);
 
@@ -115,7 +108,7 @@ class UserService extends MedusaUserService {
         if (user.store) {
             (user as any).store_name = user.store.name;
         }
-		
+
         return user;
     }
 
@@ -125,6 +118,7 @@ class UserService extends MedusaUserService {
         if (this.loggedInUser_?.store_id && !selector.store_id) {
             selector.store_id = this.loggedInUser_.store_id;
         }
+
     }
 }
 

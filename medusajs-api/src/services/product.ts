@@ -64,19 +64,20 @@ class ProductService extends MedusaProductService {
 		const product = await super.retrieve(productId, config);
 
 		if (product.store_id && this.loggedInUser_?.store_id && product.store_id !== this.loggedInUser_.store_id) {
-			// Throw error if you don't want a product to be accessible to other stores
 			throw new MedusaError(MedusaError.Types.NOT_FOUND, 'Product does not exist');
 		}
 
 		return product;
 	}
 
-	async create(productObject: CreateProductInput): Promise<Product> {
-		if (this.loggedInUser_) {
-			productObject.store_id = this.loggedInUser_.store_id;
+	async createProductForStore(productObject: CreateProductInput, store_id: string): Promise<Product> {
+		const store = await this.storeService_.retrieve_(store_id);
+		if (!store) {
+			throw new MedusaError(MedusaError.Types.INVALID_DATA, 'Store not found');
 		}
 
-		// Upsert shipping options if they exist
+		productObject.store_id = store_id;
+
 		if (productObject.shipping_options?.length) {
 			productObject.shipping_options = await this.shippingOptionRepository_.upsertShippingOptions(
 				productObject.shipping_options
