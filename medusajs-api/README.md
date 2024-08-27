@@ -15,6 +15,20 @@ This marketplace starter includes several API endpoints for managing stores, pro
 - **Base URL:** `http://localhost:9000`
 - **Authentication:** All endpoints that modify data (create, update, delete) require authentication via a Bearer token.
 
+### Adding a Vendor User
+
+To add a vendor user via the API, follow these steps:
+
+Make a POST request to the endpoint `/vendor/users` with the following body:
+
+```json
+{
+  "email": "vendoremail@email.com",
+  "password": "vendorpassword"
+}
+```
+After this, an admin will need to approve the vendor before they can log in, via the admin dashboard.
+
 ### Authentication
 
 Before making authenticated requests, you must first obtain an access token. This token is used for all subsequent requests that require authorization.
