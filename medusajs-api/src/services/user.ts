@@ -89,6 +89,13 @@ class UserService extends MedusaUserService {
         return [users, count];
     }
 
+    /**
+     * This method is used to authenticate user
+     * If the user is not approved, we throw an error
+     * @param email
+     * @param config
+     * @returns
+     */
     async retrieveByEmail(email: string, config: FindConfig<User> = {}): Promise<User> {
         const userRepo = this.activeManager_.withRepository(this.userRepository_);
 
