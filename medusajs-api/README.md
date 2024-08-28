@@ -83,7 +83,7 @@ curl -X GET http://localhost:9000/stores
 
 ### Get a Specific Store with Products
 
-Retrieve a specific store by its ID, along with all its associated products.
+Retrieve a specific store by its ID, along with all its associated products. This operation **requires** authentication with a Bearer token.
 
 **Endpoint:**
 - **URL:** `/stores/{store_id}`
@@ -91,7 +91,8 @@ Retrieve a specific store by its ID, along with all its associated products.
 
 **Request Example:**
 ```bash
-curl -X GET http://localhost:9000/stores/store_01J69FP062WK7HPH3XS8EHNNGC 
+curl -X GET http://localhost:9000/stores/store_01J69FP062WK7HPH3XS8EHNNGC \
+-H "Authorization: Bearer your_access_token"
 ```
 
 **Response Example:**
