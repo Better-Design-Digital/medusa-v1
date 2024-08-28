@@ -1,0 +1,7 @@
+node_modules/
+.next/
+public/
+src/app/
+src/modules
+cypress/**/*.js
+src/**/*.d.ts
