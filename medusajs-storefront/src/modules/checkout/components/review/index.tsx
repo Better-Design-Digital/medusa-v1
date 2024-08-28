@@ -15,10 +15,13 @@ const Review = ({
 
   const isOpen = searchParams.get("step") === "review"
 
+  const paidByGiftcard =
+    cart?.gift_cards && cart?.gift_cards?.length > 0 && cart?.total === 0
+
   const previousStepsCompleted =
     cart.shipping_address &&
     cart.shipping_methods.length > 0 &&
-    cart.payment_session
+    (cart.payment_session || paidByGiftcard)
 
   return (
     <div className="bg-white">
@@ -47,7 +50,7 @@ const Review = ({
               </Text>
             </div>
           </div>
-          <PaymentButton cart={cart} />
+          <PaymentButton cart={cart} data-testid="submit-order-button" />
         </>
       )}
     </div>
