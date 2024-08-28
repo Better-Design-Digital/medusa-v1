@@ -34,12 +34,12 @@ After this, an admin will need to approve the vendor before they can log in, via
 Before making authenticated requests, you must first obtain an access token. This token is used for all subsequent requests that require authorization.
 
 **Endpoint:**
-- **URL:** `/admin/auth`
+- **URL:** `/admin/auth/token`
 - **Method:** `POST`
 
 **Request Example:**
 ```bash
-curl -X POST http://localhost:9000/admin/auth \
+curl -X POST http://localhost:9000/admin/auth/token \
 -H "Content-Type: application/json" \
 -d '{
   "email": "user@example.com",
