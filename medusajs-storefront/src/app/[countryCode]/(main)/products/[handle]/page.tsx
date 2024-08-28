@@ -1,5 +1,3 @@
-"use server"
-
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
@@ -58,10 +56,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${product.title} | Anythink Store`,
+    title: `${product.title} | Medusa Store`,
     description: `${product.title}`,
     openGraph: {
-      title: `${product.title} | Anythink Store`,
+      title: `${product.title} | Medusa Store`,
       description: `${product.title}`,
       images: product.thumbnail ? [product.thumbnail] : [],
     },

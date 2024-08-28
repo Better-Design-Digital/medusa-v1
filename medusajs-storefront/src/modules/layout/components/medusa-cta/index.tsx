@@ -1,12 +1,13 @@
-import { Text } from "@medusajs/ui"
+import { Text } from "@medusajs/ui";
 
-import Medusa from "../../../common/icons/medusa"
-import NextJs from "../../../common/icons/nextjs"
+import Medusa from "../../../common/icons/medusa";
+import NextJs from "../../../common/icons/nextjs";
 
 const MedusaCTA = () => {
   return (
     <Text className="flex gap-x-2 txt-compact-small-plus items-center">
-      Powered by
+      Powered by Anythink
+      &
       <a href="https://www.medusajs.com" target="_blank" rel="noreferrer">
         <Medusa fill="#9ca3af" className="fill-[#9ca3af]" />
       </a>
@@ -15,7 +16,7 @@ const MedusaCTA = () => {
         <NextJs fill="#9ca3af" />
       </a>
     </Text>
-  )
-}
+  );
+};
 
-export default MedusaCTA
+export default MedusaCTA;

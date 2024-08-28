@@ -1,13 +1,13 @@
-import React from "react"
+import React from "react";
 
-import UnderlineLink from "@modules/common/components/interactive-link"
+import UnderlineLink from "@modules/common/components/interactive-link";
 
-import AccountNav from "../components/account-nav"
-import { Customer } from "@medusajs/medusa"
+import AccountNav from "../components/account-nav";
+import { Customer } from "@medusajs/medusa";
 
 interface AccountLayoutProps {
-  customer: Omit<Customer, "password_hash"> | null
-  children: React.ReactNode
+  customer: Omit<Customer, "password_hash"> | null;
+  children: React.ReactNode;
 }
 
 const AccountLayout: React.FC<AccountLayoutProps> = ({
@@ -15,7 +15,7 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
   children,
 }) => {
   return (
-    <div className="flex-1 small:py-12">
+    <div className="flex-1 small:py-12" data-testid="account-page">
       <div className="flex-1 content-container h-full max-w-5xl mx-auto bg-white flex flex-col">
         <div className="grid grid-cols-1  small:grid-cols-[240px_1fr] py-12">
           <div>{customer && <AccountNav customer={customer} />}</div>
@@ -30,14 +30,12 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
             </span>
           </div>
           <div>
-            <UnderlineLink href="/customer-service">
-              Customer Service
-            </UnderlineLink>
+            <a href="">Customer Service</a>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AccountLayout
+export default AccountLayout;
