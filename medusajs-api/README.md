@@ -128,32 +128,32 @@ curl -X POST http://localhost:9000/stores/store_01J69FP062WK7HPH3XS8EHNNGC/produ
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer your_access_token" \
 -d '{
-  "title": "New T-Shirt",
-  "description": "A comfortable cotton t-shirt",
-  "status": "published",
-  "options": [
-    {
-      "title": "Color",
-      "values": ["Red", "Blue"]
-    }
-  ],
-  "variants": [
-    {
-      "title": "T-Shirt Variant",
-      "prices": [
+    "title": "1T-Shirt",
+    "description": "A co1mfortable cotton t-shirt",
+    "status": "published",
+    "options": [
         {
-          "currency_code": "usd",
-          "amount": 2000
+            "title": "Color",
+            "values": ["Blue", "Red", "Green"]
         }
-      ],
-      "manage_inventory": true,
-      "options": [
+    ],
+    "variants": [
         {
-          "value": "Red"
+            "title": "T1-Shirt",
+            "prices": [
+                {
+                    "currency_code": "usd",
+                    "amount": 2000
+                }
+            ],
+            "manage_inventory": true,
+            "inventory_quantity": 100, 
+            "options": [
+                { "value": "Blue" }
+            ]
         }
-      ]
-    }
-  ]
+    ],
+    "shipping_options": ["option_id_1", "option_id_2"]
 }'
 ```
 
